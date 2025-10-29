@@ -14,11 +14,11 @@ Each vulnerability is self-contained. To run one:
     ```bash
     cd <vulnerability-directory>
     ```
-2.  Run the application or the helper script:
+2.  Run the application:
     ```bash
     go run main.go
     ```
-    or
+    and then the poc script:
     ```bash
     bash <vulnerability_poc>.sh
     ```
