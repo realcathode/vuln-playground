@@ -42,3 +42,16 @@ The application takes a URL from a query parameter (`?url=...`) and passes it di
 
 ---
 
+### 2. Server-Side Template Injection (SSTI)
+
+* **Directory:** ./SSTI/
+
+**Description:**
+This vulnerability occurs when user-supplied input is parsed by the server as a template, rather than just being passed to the template as data. This allows an attacker to execute template logic on the server.
+
+This high-severity example demonstrates a critical mistake: passing the entire web framework's context object to the template. This gives the attacker access to all of the context's powerful, built-in methods, leading to Arbitrary File Read.
+
+**The Flaw (`/SSTI/main.go`):** 
+The application makes two critical errors. First, it concatenates the user's name parameter directly into the template string. Second, it passes the entire echo.Context (c) to the template's Execute method.
+
+* Arbitrary File Read: `curl "http://localhost:8080/hello?name={{ .File "/etc/passwd" }}"`
